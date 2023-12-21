@@ -1,0 +1,113 @@
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+
+SELECT *
+FROM SQLBasics.dbo.SalaryInfo
+
+--*Joins*
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+INNER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+FULL OUTER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+LEFT OUTER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+RIGHT OUTER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+
+SELECT EmployeeInfo.employeeid,firstname,lastname,jobtitle,salary
+FROM SQLBasics.dbo.EmployeeInfo
+FULL OUTER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+
+SELECT EmployeeInfo.employeeid,firstname,lastname,jobtitle,salary
+FROM SQLBasics.dbo.EmployeeInfo
+INNER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+WHERE firstname <> 'Pedro'
+ORDER BY salary DESC
+
+SELECT jobtitle,AVG(salary) AS avgwritersalary
+FROM SQLBasics.dbo.EmployeeInfo
+INNER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+WHERE jobtitle = 'writer'
+GROUP BY jobtitle 
+
+--*Unions*
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+UNION ALL
+SELECT *
+FROM SQLBasics.dbo.ContractorInfo
+ORDER BY age
+
+--*Case statements*
+
+SELECT firstname,lastname,age,
+CASE
+   WHEN age >40 THEN 'old'
+   WHEN age BETWEEN 28 AND 39 THEN 'middleage' 
+   ELSE 'young'
+END AS oldoryoung
+FROM SQLBasics.dbo.EmployeeInfo
+ORDER BY age
+
+SELECT firstname,lastname,jobtitle,salary,
+   CASE
+   WHEN jobtitle = 'animator' THEN salary +(salary * .20)
+   ELSE salary +(salary * .10)
+END AS newsalary
+FROM SQLBasics.dbo.EmployeeInfo
+INNER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+
+--*Having*
+
+SELECT jobtitle, COUNT(jobtitle)
+FROM SQLBasics.dbo.EmployeeInfo
+INNER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+GROUP BY jobtitle
+HAVING COUNT(jobtitle) > 1
+
+SELECT jobtitle, AVG(salary)
+FROM SQLBasics.dbo.EmployeeInfo
+INNER JOIN SQLBasics.dbo.SalaryInfo
+   ON EmployeeInfo.employeeid = SalaryInfo.employeeid
+GROUP BY jobtitle
+HAVING AVG(salary) >50000
+ORDER BY AVG(salary)
+
+--*Aliasing*
+
+SELECT firstname +' '+ lastname AS fullname
+FROM SQLBasics.dbo.EmployeeInfo
+
+SELECT AVG(age) AS avgage
+FROM SQLBasics.dbo.EmployeeInfo
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo AS EInfo
+
+SELECT *
+FROM SQLBasics.dbo.SalaryInfo AS SInfo
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo AS EInfo
+FULL JOIN SQLBasics.dbo.SalaryInfo AS SInfo
+   ON EInfo.employeeid = SInfo.employeeid
+FULL JOIN SQLBasics.dbo.ContractorInfo AS CInfo
+   ON EInfo.employeeid = CInfo.employeeid
