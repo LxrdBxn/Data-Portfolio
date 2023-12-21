@@ -1,0 +1,85 @@
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+
+SELECT Distinct(employeeid)
+FROM SQLBasics.dbo.EmployeeInfo
+
+SELECT COUNT (employeeid)
+FROM SQLBasics.dbo.EmployeeInfo
+
+SELECT *
+FROM SQLBasics.dbo.SalaryInfo
+
+SELECT MAX(salary)
+FROM SQLBasics.dbo.SalaryInfo
+
+SELECT MIN(salary)
+FROM SQLBasics.dbo.SalaryInfo
+
+SELECT AVG(salary)
+FROM SQLBasics.dbo.SalaryInfo
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+WHERE firstname = 'Justin'
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+WHERE firstname <> 'Justin'
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+WHERE firstname LIKE 'V%'
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+WHERE firstname LIKE '%o%'
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+WHERE firstname IS NULL
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+WHERE firstname IS NOT NULL
+
+SELECT *
+FROM SQLBasics.dbo.EmployeeInfo
+WHERE firstname IN ('Von','Alex','Jane')
+
+SELECT *
+FROM SQLBasics.dbo.SalaryInfo
+WHERE salary < 100000
+
+SELECT *
+FROM SQLBasics.dbo.SalaryInfo
+WHERE salary > 100000
+
+SELECT *
+FROM SQLBasics.dbo.SalaryInfo
+WHERE salary <= 120000
+
+SELECT *
+FROM SQLBasics.dbo.SalaryInfo
+WHERE salary <= 120000 AND jobtitle = 'animator'
+
+SELECT *
+FROM SQLBasics.dbo.SalaryInfo
+WHERE salary <= 120000 AND 
+
+SELECT Count(gender)
+FROM SQLBasics.dbo.EmployeeInfo
+GROUP BY gender
+ORDER BY gender 
+
+SELECT Count(gender)
+FROM SQLBasics.dbo.EmployeeInfo
+WHERE age <60
+GROUP BY gender
+ORDER BY gender 
+
+SELECT gender,age, Count(gender)
+FROM SQLBasics.dbo.EmployeeInfo
+GROUP BY gender, age
+ORDER BY age DESC
+
