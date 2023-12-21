@@ -1,0 +1,66 @@
+CREATE TABLE EmployeeInfo
+(employeeid INT,
+firstname VARCHAR(50),
+lastname VARCHAR(50),
+age INT,
+gender VARCHAR(1),
+phonenumber INT)
+
+INSERT INTO EmployeeInfo
+VALUES (101, 'Justin','Dale',18,'m',770)
+
+INSERT INTO EmployeeInfo
+VALUES (102,'Von','Dale',20,'m',771)
+
+INSERT INTO EmployeeInfo
+VALUES (103,'Alex','Wade',20,'m',772)
+
+INSERT INTO EmployeeInfo
+VALUES (104,'Jane','Foster',36,'f',773)
+
+INSERT INTO EmployeeInfo
+VALUES (105,'Dean','Winchester',42,'m',774)
+
+INSERT INTO EmployeeInfo
+VALUES (106,'Hinata','Hyuga',30,'f',775)
+
+INSERT INTO EmployeeInfo
+VALUES (107,'James','Bond',70,'m',776)
+
+INSERT INTO EmployeeInfo
+VALUES (108,'Emily','Dickinson',61,'f',001)
+
+INSERT INTO EmployeeInfo
+VALUES (109,'Pedro','Pascal',35,'m',777)
+
+CREATE TABLE SalaryInfo
+(employeeid INT,
+jobtitle VARCHAR(50),
+salary INT)
+
+INSERT INTO SalaryInfo
+VALUES (101,'animator',90000)
+
+INSERT INTO SalaryInfo
+VALUES (102,'data analyst',80000)
+
+INSERT INTO SalaryInfo
+VALUES (103,'writer',50000)
+
+INSERT INTO SalaryInfo
+VALUES (104,'creative director',120000)
+
+INSERT INTO SalaryInfo
+VALUES (105,'security',50000)
+
+INSERT INTO SalaryInfo
+VALUES (106,'animator',140000)
+
+INSERT INTO SalaryInfo
+VALUES (107,'help desk',40000)
+
+INSERT INTO SalaryInfo
+VALUES (108,'writer',90000)
+
+INSERT INTO SalaryInfo
+VALUES (109,'ceo',200000)
