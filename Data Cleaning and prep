@@ -1,0 +1,76 @@
+--EDA goal, Find the top 10 rated English books, authors and narrator relased from 2015-2023. 
+--My goal, Clean the dataset to prepare for analysis.
+
+
+SELECT *
+FROM PortfolioProject.dbo.audible_uncleaned
+
+--Updating values to be converted into float for later calculations
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = NULL
+WHERE stars = 'Not rated yet'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 1
+WHERE stars LIKE '1 out of 5%'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 1.5
+WHERE stars LIKE '1.5 out of 5%'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 2
+WHERE stars LIKE '2 out of 5%'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 2.5
+WHERE stars LIKE '2.5 out of 5%'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 3
+WHERE stars LIKE '3 out of 5%'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 3.5
+WHERE stars LIKE '3.5 out of 5%'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 4
+WHERE stars LIKE '4 out of 5%'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 4.5
+WHERE stars LIKE '4.5 out of 5%'
+
+UPDATE PortfolioProject.dbo.audible_uncleaned
+SET stars = 5
+WHERE stars LIKE '5 out of 5%'
+
+--Converting nvarchar into float
+
+ALTER TABLE PortfolioProject.dbo.audible_uncleaned
+ALTER COLUMN stars FLOAT;
+
+--Removing duplicates of book names
+
+SELECT *
+FROM PortfolioProject.dbo.audible_uncleaned ;
+WITH cte AS
+(SELECT *,
+ROW_NUMBER() OVER (PARTITION BY name ORDER BY stars DESC) AS rn
+FROM PortfolioProject.dbo.audible_uncleaned)
+DELETE FROM cte WHERE rn >1
+
+--Checking that duplicates were removed
+
+SELECT name, COUNT(name)
+FROM PortfolioProject.dbo.audible_uncleaned
+GROUP BY name
+
+--Checking that the data looks right and performes properly
+
+SELECT name,author,narrator,releasedate,language,stars
+FROM PortfolioProject.dbo.audible_uncleaned
+WHERE language = 'English' AND releasedate > '2015-01-01'
+ORDER BY stars DESC
